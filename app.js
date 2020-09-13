@@ -1,6 +1,8 @@
+const path = require("path")
 const express = require("express")
 const dotenv = require("dotenv")
 const ejs = require("ejs")
+const ejsLayout = require("express-ejs-layouts")
 const bodyParser = require("body-parser")
 const morgan = require("morgan") // morgan for login
 const connectDB = require("./config/db")
@@ -20,10 +22,12 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"))
 }
 
+app.use(ejsLayout)
+app.set("layout","./layouts/main")//changing default layouts
 app.set('view engine', 'ejs')
 
 app.use(bodyParser.urlencoded({extended: true}))
-app.use(express.static("public"))
+app.use(express.static(path.join(__dirname,"public")))
 
 
 //Routes
