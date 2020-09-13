@@ -5,12 +5,18 @@ const ejs = require("ejs")
 const ejsLayout = require("express-ejs-layouts")
 const bodyParser = require("body-parser")
 const morgan = require("morgan") // morgan for login
+const passport = require("passport")
+const session = require("express-session")
 const connectDB = require("./config/db")
 
 
 //loading config file
 
 dotenv.config({path:"./config/config.env"})
+
+//passport config
+require("./config/passport")(passport)
+
 
 connectDB()
 
@@ -27,8 +33,20 @@ app.use(ejsLayout)
 app.set("layout","./layouts/main")//changing default layouts
 app.set('view engine', 'ejs')
 
+//sessions
+app.use(session({
+  secret: 'smelly cat',
+  resave: false,
+  saveUninitialized: false,
+}))
+
+//passport middleware
+app.use(passport.initialize())
+app.use(passport.session())
+
+//loading statics
 app.use(bodyParser.urlencoded({extended: true}))
-app.use(express.static(path.join(__dirname,"public"))) //loading statics
+app.use(express.static(path.join(__dirname,"public")))
 
 
 //Routes
