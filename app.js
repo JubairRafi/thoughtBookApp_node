@@ -1,5 +1,6 @@
 const path = require("path")
 const express = require("express")
+const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const ejs = require("ejs")
 const ejsLayout = require("express-ejs-layouts")
@@ -7,6 +8,7 @@ const bodyParser = require("body-parser")
 const morgan = require("morgan") // morgan for login
 const passport = require("passport")
 const session = require("express-session")
+const mongoStore = require("connect-mongo")(session)
 const connectDB = require("./config/db")
 
 
@@ -38,6 +40,7 @@ app.use(session({
   secret: 'smelly cat',
   resave: false,
   saveUninitialized: false,
+  store: new mongoStore({ mongooseConnection: mongoose.connection})
 }))
 
 //passport middleware
