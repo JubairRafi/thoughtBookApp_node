@@ -49,12 +49,14 @@ app.use(passport.session())
 
 //loading statics
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(express.json())
 app.use(express.static(path.join(__dirname,"public")))
 
 
 //Routes
 app.use("/",require("./routes/index"))
 app.use("/auth",require("./routes/auth"))
+app.use("/thoughts",require("./routes/thoughts"))
 
 
 
