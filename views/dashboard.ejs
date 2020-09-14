@@ -3,3 +3,30 @@
 <h3>Welcome <%=name%> </h3>
 
 <p>Here are your Thoughts</p>
+
+<% if(!thoughts){ %>
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% thoughts.forEach((thought)=>{ %>
+          <tr>
+            <td><a href="/thoughts/<%= thought._id %>"><%=thought.title%></a></td>
+            <td><%= thought.createdAt %></td>
+            <td><span class="dash-status"><%=thought.status%></span></td>
+            <td></td>
+          </tr>
+
+      <%  }) %>
+      </tbody>
+    </table>
+
+  <%   }else{ %>
+    <p>you have not created any thoughts</p>
+    <%   }%>
