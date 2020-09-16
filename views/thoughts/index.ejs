@@ -1,0 +1,30 @@
+<h1>Thoughts</h1>
+<div class="row">
+    <% thoughts.forEach((thought)=>{ %>
+      <div class="col s12 m4">
+        <div class="card">
+          <div class="card-image">
+            <!-- //edit icon -->
+
+          </div>
+          <div class="card-content center-align">
+            <h5><%=thought.title%></h5>
+            <p><%=thought.body%></p><br>
+            <div class="chip">
+              <img src="<%=thought.user.image%>" alt="">
+              <a href="/thoughts/user/<%=thought.user._id%>"><%=thought.user.displayName%></a>
+
+            </div>
+
+          </div>
+          <div class="card-action center-align">
+            <a href="/thoughts/<%thought._id%>" class="btn grey">Read More</a>
+          </div>
+
+        </div>
+
+      </div>
+
+  <%  })%>
+
+</div>

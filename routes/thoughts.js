@@ -12,6 +12,19 @@ router.get("/add", (req,res)=>{
   res.render("thoughts/add")
 })
 
+//description: show all thoughts
+//route : GET /thoughts
+
+router.get("/", async(req,res)=>{
+    try{
+      const thoughts = await Thought.find({status:"public"}).populate("user").sort({createdAt: "desc"}).lean()
+      res.render("thoughts/index",{thoughts})
+    }catch(e){
+      console.error(e)
+      res.render("error/500")
+    }
+})
+
 //description: add from
 //route : POST /thoughts
 

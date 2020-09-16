@@ -30,10 +30,15 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"))
 }
 
+//ejs hepler
+
+
 //template and layouts
 app.use(ejsLayout)
 app.set("layout","./layouts/main")//changing default layouts
 app.set('view engine', 'ejs')
+
+
 
 //sessions
 app.use(session({
@@ -57,6 +62,7 @@ app.use(express.static(path.join(__dirname,"public")))
 app.use("/",require("./routes/index"))
 app.use("/auth",require("./routes/auth"))
 app.use("/thoughts",require("./routes/thoughts"))
+
 
 
 

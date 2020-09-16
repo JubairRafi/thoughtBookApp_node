@@ -18,7 +18,7 @@
         <% thoughts.forEach((thought)=>{ %>
           <tr>
             <td><a href="/thoughts/<%= thought._id %>"><%=thought.title%></a></td>
-            <td><%= thought.createdAt %></td>
+            <td><%=thought.createdAt.toLocaleString()%></td>
             <td><span class="dash-status"><%=thought.status%></span></td>
             <td></td>
           </tr>
